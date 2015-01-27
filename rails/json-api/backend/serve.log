@@ -1,0 +1,33 @@
+[2015/01/21 16:35:34 MST] [INFO] (ngrok/log.Info:89) Reading configuration file /Users/james/.ngrok
+[2015/01/21 16:35:34 MST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
+[2015/01/21 16:35:34 MST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [view] [web] Serving web interface on 127.0.0.1:4040
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2015/01/21 16:35:34 MST] [INFO] (ngrok/log.Info:89) Checking for update
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] New connection to: 96.126.125.171:443
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Writing message: {"Type":"Auth","Payload":{"Version":"2","MmVersion":"1.7","User":"","Password":"","OS":"darwin","Arch":"amd64","ClientId":""}}
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Waiting to read message
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Reading message with length: 120
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Read message {"Type":"AuthResp","Payload":{"Version":"2","MmVersion":"1.7","ClientId":"0739d1fdae4d395839efb4e2762ac543","Error":""}}
+[2015/01/21 16:35:34 MST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Authenticated with server, client id: 0739d1fdae4d395839efb4e2762ac543
+[2015/01/21 16:35:34 MST] [EROR] (ngrok/log.(*PrefixLogger).Error:68) [client] Failed to save auth token: open /Users/james/.ngrok: no such file or directory
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Writing message: {"Type":"ReqTunnel","Payload":{"ReqId":"5a305cc5e1794f77","Protocol":"https+http","Hostname":"","Subdomain":"","HttpAuth":"","RemotePort":0}}
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Waiting to read message
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Reading message with length: 32
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Read message {"Type":"ReqProxy","Payload":{}}
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Waiting to read message
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Reading message with length: 124
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Read message {"Type":"NewTunnel","Payload":{"ReqId":"5a305cc5e1794f77","Url":"https://20322df3.ngrok.com","Protocol":"https","Error":""}}
+[2015/01/21 16:35:34 MST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Tunnel established at https://20322df3.ngrok.com
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Waiting to read message
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Reading message with length: 122
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Read message {"Type":"NewTunnel","Payload":{"ReqId":"5a305cc5e1794f77","Url":"http://20322df3.ngrok.com","Protocol":"http","Error":""}}
+[2015/01/21 16:35:34 MST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [client] Tunnel established at http://20322df3.ngrok.com
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [ctl:43a88667] Waiting to read message
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [view] [term] Waiting for update
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:6bdb2d5c] New connection to: 96.126.125.171:443
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:6bdb2d5c] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"0739d1fdae4d395839efb4e2762ac543"}}
+[2015/01/21 16:35:34 MST] [DEBG] (ngrok/log.(*PrefixLogger).Debug:56) [pxy:6bdb2d5c] Waiting to read message
+[2015/01/21 16:35:40 MST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [view] [term] Got quit command
+[2015/01/21 16:35:40 MST] [INFO] (ngrok/log.(*PrefixLogger).Info:60) [controller] Shutting down

@@ -1,0 +1,1 @@
+{"project":{"id":58,"name":"beer","slug":"beer","branches":["development","staging","master"],"prefix":"_site","fqdn":{"development":"beer-development.beta.bowtied.io","staging":"beer-staging.beta.bowtied.io","master":"beer.beta.bowtied.io"}}}

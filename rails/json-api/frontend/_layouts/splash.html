@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+
+  <body>
+    <script type="text/javascript">
+      $(function(){
+        bowtie.user.info(function(user){
+          if(user){
+            document.location.href = '/application.html';
+          }
+        });
+      });
+    </script>
+
+    <div class="pagewrapper">
+      {{ content }}
+    </div>
+  </body>
+</html>

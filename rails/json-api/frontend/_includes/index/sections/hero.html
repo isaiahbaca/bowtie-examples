@@ -1,0 +1,28 @@
+<div id="hero" class="{{sectionClasses}}" style="{{sectionBackground}}">
+  <div class="container">
+    <div class="logo-display">
+      {% if image %}
+        <img src="{{{image.url}}}" class="logo container img hidden-xs" alt="{{{image.alt}}}">
+        <img src="{{{image.url}}}" class="logo container img-responsive visible-xs img" alt="{{{image.alt}}}">
+      {% endif %}
+
+      {% if title %}
+        <h1 class="page-title">{{title}}</h1>
+      {% endif %}
+
+    </div>
+    {% if subtitle %}
+      <h2>{{subtitle}}</h2>
+    {% endif %}
+
+    {% if body %}
+      <p>{{body}}</p>
+    {% endif %}
+
+    {% if action %}
+      <a href="{{{action.url}}}">
+        <button class="btn {{{ action.style | default: 'btn_default' }}}">{{action.content}}</button>
+      </a>
+    {% endif %}
+  </div>
+</div>

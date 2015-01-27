@@ -1,0 +1,17 @@
+# Site settings
+title: BowTie Beer
+email: james@beer.beta.bowtie.io
+description: >                # This means to ignore newlines until "baseurl:"
+  Beer ranking on BowTie
+baseurl: ""                   # The subpath of your site, e.g. /blog/
+url: "beer.beta.bowtie.io"  # The base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+
+# Kramdown options
+kramdown:
+  input: GFM                  # Enable Github Flavored Markdown
+
+include:
+  - ./vendor                  # Include vendor scripts and styles
