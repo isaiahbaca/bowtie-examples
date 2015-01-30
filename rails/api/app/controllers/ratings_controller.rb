@@ -1,16 +1,25 @@
 class RatingsController < ApplicationController
   def index
     @ratings = beer.ratings.order('created_at desc')
-    render_json_success @ratings
+
+    respond_to do |format|
+      format.json { render_json_success @ratings }
+    end
   end
 
   def create
-    @rating = beer.ratings.new rating_params
+    @beer    = beer
+    @brewery = brewery
+    @rating  = beer.ratings.new rating_params
 
-    if @rating.save
-      render_json_success @rating
-    else
-      render_json_error t(:rating_save_failure), @rating.errors
+    respond_to do |format|
+      if @rating.save
+        format.json { render_json_success @rating }
+        format.html { redirect_to brewery_beer_path(@brewery, @beer), notice: t(:rating_create_success) }
+      else
+        format.json { render_json_error t(:rating_save_failure), @rating.errors }
+        format.html { }
+      end
     end
   end
 

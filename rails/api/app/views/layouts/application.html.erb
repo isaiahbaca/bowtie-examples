@@ -8,6 +8,26 @@
 </head>
 <body>
 
+<ul class="breadcrumbs">
+  <li><%= link_to "Home", root_path %></li>
+
+  <% if @brewery && !@brewery.new_record? %>
+    <li><%= link_to @brewery.name, brewery_path(@brewery) %></li>
+  <% end %>
+
+  <% if @beer && !@beer.new_record? %>
+    <li><%= link_to @beer.name, brewery_beer_path(@brewery, @beer) %></li>
+  <% end %>
+</ul>
+
+<ul class="options">
+  <li><%= link_to "New Brewery", new_brewery_path %></li>
+
+  <% if @brewery && !@brewery.new_record? %>
+    <li><%= link_to "New Beer", new_brewery_beer_path(@brewery) %></li>
+  <% end %>
+</ul>
+
 <%= yield %>
 
 </body>

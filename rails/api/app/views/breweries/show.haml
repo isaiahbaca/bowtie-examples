@@ -1,0 +1,7 @@
+%h3= @brewery.name
+%p= @brewery.description
+
+.beers
+  .index
+    - @beers.each do |beer|
+      = link_to beer.name, [@brewery, beer]

@@ -1,0 +1,14 @@
+%h3= @beer.name
+%p= @beer.description
+
+.ratings
+  .index
+    - @ratings.each do |rating|
+      %span.comment= rating.comment
+      %span.created_at= rating.created_at
+
+  .create
+    = simple_form_for [@brewery, @beer, @rating] do |f|
+      = f.input :comment
+      = f.input :rating
+      = f.button :submit

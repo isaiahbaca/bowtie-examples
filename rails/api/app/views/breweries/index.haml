@@ -1,0 +1,4 @@
+- @breweries.each do |brewery|
+  .brewery
+    %h3= link_to brewery.name, brewery_path(brewery)
+    %p= brewery.description

@@ -17,22 +17,52 @@ describe RatingsController do
   end
 
   describe "#index" do
-    it "provides an index of all ratings" do
-      create_rating(beer)
+    context "format: supported" do
+      it "provides an index of all ratings" do
+        create_rating(beer)
+        get :index, brewery_id: brewery.id, beer_id: beer.id, format: :json
+        expect(assigns[:ratings]).to include(rating)
+      end
+    end
 
-      get :index, brewery_id: brewery.id, beer_id: beer.id
+    context "format: `json`" do
+      it "provides a JSON response" do
+        create_rating(beer)
+        get :index, brewery_id: brewery.id, beer_id: beer.id, format: :json
+        expect(response).to be_json
+      end
+    end
 
-      expect(response.status).to eq(200)
-      expect(assigns[:ratings]).to include(rating)
+    context "format: `html`" do
+      it "throws an unknown format error" do
+        expect {
+          get :index, brewery_id: brewery.id, beer_id: beer.id
+        }.to raise_exception(ActionController::UnknownFormat)
+      end
     end
   end
 
   describe "#create" do
-    it "adds a rating" do
-      expect{
+    context "format: supported" do
+      it "adds a new rating" do
+        expect{
+          post :create, brewery_id: brewery.id, beer_id: beer.id, rating: rating_params
+        }.to change{Rating.count}
+      end
+    end
+
+    context "format: `json`" do
+      it "responds with JSON" do
+        post :create, brewery_id: brewery.id, beer_id: beer.id, rating: rating_params, format: :json
+        expect(response).to be_json
+      end
+    end
+
+    context "format: `html`" do
+      it "redirects to the beer detail page" do
         post :create, brewery_id: brewery.id, beer_id: beer.id, rating: rating_params
-        expect(response.status).to eq(200)
-      }.to change{Rating.count}
+        expect(subject).to redirect_to(brewery_beer_path(brewery, beer))
+      end
     end
   end
 end

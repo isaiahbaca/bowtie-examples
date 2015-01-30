@@ -84,6 +84,15 @@ RSpec.configure do |config|
 =end
 end
 
+RSpec::Matchers.define :be_json do
+  match do |response|
+    begin
+      JSON.load(response.body)
+    rescue
+    end
+  end
+end
+
 def create_brewery
   Brewery.create!({
     name:         "test brewery",

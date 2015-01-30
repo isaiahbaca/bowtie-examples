@@ -27,6 +27,20 @@ describe BreweriesController do
       expect(response.status).to eq(200)
       expect(assigns[:breweries]).to include(brewery)
     end
+
+    context "format: `json`" do
+      it "responds with JSON" do
+        get :index, format: :json
+        expect(response).to be_json
+      end
+    end
+
+    context "format: `html`" do
+      it "renders the index template" do
+        get :index
+        expect(subject).to render_template('breweries/index')
+      end
+    end
   end
 
   describe "#show" do
@@ -35,22 +49,49 @@ describe BreweriesController do
       expect(response.status).to eq(200)
       expect(assigns[:brewery]).to eq(brewery)
     end
+
+    context "format: `json`" do
+      it "responds with JSON" do
+        get :show, id: brewery.id, format: :json
+        expect(response).to be_json
+      end
+    end
+
+    context "format: `html`" do
+      render_views
+
+      it "renders the show view" do
+        get :show, id: brewery.id
+        expect(subject).to render_template("breweries/show")
+      end
+    end
   end
 
   describe "#create" do
     it "adds a brewery" do
       expect{
         post :create, brewery: brewery_params
-        expect(response.status).to eq(200)
       }.to change{Brewery.count}
+    end
+
+    context "format: `json`" do
+      it "responds with JSON" do
+        post :create, brewery: brewery_params, format: :json
+        expect(response).to be_json
+      end
+    end
+
+    context "format: `html`" do
+      it "redirects to the brewery detail page" do
+        post :create, brewery: brewery_params
+        expect(subject).to redirect_to(brewery_path(assigns[:brewery].id))
+      end
     end
   end
 
   describe "#update" do
     it "updates the brewery" do
-      post :update, id: brewery.id, brewery: { name: "updated name" }
-      expect(response.status).to eq(200)
-
+      post :update, id: brewery.id, brewery: { name: "updated name" }, format: :json
       brewery.reload
       expect(brewery.name).to eq("updated name")
     end
@@ -59,8 +100,22 @@ describe BreweriesController do
       request.headers.merge!(non_author_headers)
 
       expect {
-        post :update, id: brewery.id, brewery: { name: "updated name" }
+        put :update, id: brewery.id, brewery: { name: "updated name" }
       }.to raise_exception(ActiveRecord::RecordNotFound)
+    end
+
+    context "format: `json`" do
+      it "responds with JSON details" do
+        put :update, id: brewery.id, brewery: { name: "updated_name" }, format: :json
+        expect(response).to be_json
+      end
+    end
+
+    context "format: `html`" do
+      it "redirects to the brewery detail page" do
+        put :update, id: brewery.id, brewery: { name: "updated_name" }
+        expect(subject).to redirect_to brewery_path(brewery)
+      end
     end
   end
 
@@ -77,6 +132,20 @@ describe BreweriesController do
       expect{
         post :destroy, id: brewery.id
       }.to raise_exception(ActiveRecord::RecordNotFound)
+    end
+
+    context "format: `json`" do
+      it "responds with JSON details" do
+        post :destroy, id: brewery.id, format: :json
+        expect(response).to be_json
+      end
+    end
+
+    context "format: `html`" do
+      it "redirects to the brewery index" do
+        post :destroy, id: brewery.id
+        expect(subject).to redirect_to(breweries_path)
+      end
     end
   end
 end

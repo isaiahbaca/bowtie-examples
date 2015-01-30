@@ -5,7 +5,12 @@ class ApplicationController < ActionController::Base
 
   def verify_user_id
     if current_user_id.nil?
-      render json: { status: :error, message: t(:unauthorized) }, status: 403
+      respond_to do |format|
+        format.json { render json: { status: :error, message: t(:unauthorized) }, status: 403 }
+        format.html { redirect_to "/users/sign_in" }
+      end
+
+      return false
     end
   end
 

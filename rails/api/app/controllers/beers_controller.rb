@@ -3,14 +3,32 @@ class BeersController < ApplicationController
     @brewery = Brewery.find(params[:brewery_id])
     @beers   = @brewery.beers
 
-    render_json_success @beers
+    respond_to do |format|
+      format.json { render_json_success @beers }
+      format.html { }
+    end
   end
 
   def show
     @brewery = Brewery.find(params[:brewery_id])
     @beer    = @brewery.beers.find(params[:id])
 
-    render_json_success @beer
+    respond_to do |format|
+      format.json { render_json_success @beer }
+      format.html {
+        @ratings = @beer.ratings
+        @rating  = @beer.ratings.new
+      }
+    end
+  end
+
+  def new
+    @brewery = Brewery.find(params[:brewery_id])
+    @beer    = @brewery.beers.new
+
+    respond_to do |format|
+      format.html { }
+    end
   end
 
   def create
@@ -18,10 +36,23 @@ class BeersController < ApplicationController
     @beer         = @brewery.beers.new(beer_params)
     @beer.user_id = current_user_id
 
-    if @beer.save
-      render_json_success @beer
-    else
-      render_json_error t(:beer_save_failure), @beer.errors
+    respond_to do |format|
+      if @beer.save
+        format.json { render_json_success @beer }
+        format.html { redirect_to brewery_beer_path(@brewery, @beer) }
+      else
+        format.json { render_json_error t(:beer_save_failure), @beer.errors }
+        format.html { }
+      end
+    end
+  end
+
+  def edit
+    @brewery = Brewery.find(params[:brewery_id])
+    @beer    = @brewery.beers.find(params[:id])
+
+    respond_to do |format|
+      format.html { }
     end
   end
 
@@ -29,10 +60,14 @@ class BeersController < ApplicationController
     @brewery = Brewery.find(params[:brewery_id])
     @beer    = @brewery.beers.where(user_id: current_user_id).find(params[:id])
 
-    if @beer.update_attributes(beer_params)
-      render_json_success @beer
-    else
-      render_json_error t(:beer_save_failure), @beer.errors
+    respond_to do |format|
+      if @beer.update_attributes(beer_params)
+        format.json { render_json_success @beer }
+        format.html { redirect_to brewery_beer_path(@brewery, @beer) }
+      else
+        format.json { render_json_error t(:beer_save_failure), @beer.errors }
+        format.html { render 'edit' }
+      end
     end
   end
 
@@ -40,11 +75,15 @@ class BeersController < ApplicationController
     @brewery = Brewery.find(params[:brewery_id])
     @beer    = @brewery.beers.where(user_id: current_user_id).find(params[:id])
 
-    if @beer.ratings.where('user_id != ?', current_user_id).count > 0
-      render_json_error t(:beer_cannot_remove)
-    else
-      @beer.destroy
-      render_json_success
+    respond_to do |format|
+      if @beer.ratings.where('user_id != ?', current_user_id).count > 0
+        format.json { render_json_error t(:beer_cannot_remove) }
+        format.html { redirect_to brewery_beer_path(@brewery, @beer), alert: t(:beer_cannot_remove) }
+      else
+        @beer.destroy
+        format.json { render_json_success }
+        format.html { redirect_to brewery_beers_path(@brewery), notice: t(:beer_remove_success) }
+      end
     end
   end
 
